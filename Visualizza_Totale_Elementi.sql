@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS 'numero_clienti' FROM clienti;

@@ -1,0 +1,43 @@
+SELECT articoli.descrizione
+FROM unisci_fat_art
+INNER JOIN fatture
+ON fatture.numero = unisci_fat_art.id_fattura
+INNER JOIN articoli
+ON unisci_fat_art.id_articolo = articoli.ID_articolo
+WHERE data > '2003-01-01' AND data < '2003-12-31';
+
+SELECT fatture.*,clienti.*
+FROM fatture
+INNER JOIN clienti
+ON fatture.id_cliente = clienti.ID_cliente
+WHERE citta LIKE 'como' OR citta LIKE 'milano';
+
+SELECT articoli.prezzoUnitario,SUM(quantità) AS quantita
+FROM articoli
+INNER JOIN unisci_fat_art
+ON articoli.ID_articolo = unisci_fat_art.id_articolo
+INNER JOIN fatture
+ON unisci_fat_art.id_articolo = fatture.numero
+INNER JOIN clienti
+ON fatture.id_cliente = clienti.ID_cliente
+GROUP BY clienti.ragione_sociale
+HAVING quantita > 5;
+
+SELECT SUM(unisci_fat_art.quantità)
+FROM unisci_fat_art
+INNER JOIN articoli
+ON unisci_fat_art.id_articolo = articoli.ID_articolo
+INNER JOIN fatture
+ON unisci_fat_art.id_fattura = fatture.numero
+GROUP BY MONTH(data);
+
+SELECT MAX(prezzoUnitario),MIN(prezzoUnitario)
+FROM articoli
+INNER JOIN unisci_fat_art
+ON articoli.ID_articolo = unisci_fat_art.id_articolo
+INNER JOIN fatture
+ON unisci_fat_art.id_fattura = fatture.numero
+INNER JOIN clienti
+ON fatture.id_cliente = clienti.ID_cliente
+GROUP BY clienti.ragione_sociale
+HAVING clienti.ragione_sociale LIKE 'Bologna' OR clienti.ragione_sociale LIKE 'Como' OR clienti.ragione_sociale LIKE 'Milano';

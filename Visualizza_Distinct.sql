@@ -1,0 +1,1 @@
+SELECT COUNT(DISTINCT(Citta)) AS 'numero_citta' FROM clienti;
