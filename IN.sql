@@ -1,0 +1,1 @@
+Select B.* From biciclette As B, produttori as P Where B.categoria IN ("tandem", "corsa") AND B.id_produttore IN (1,3)

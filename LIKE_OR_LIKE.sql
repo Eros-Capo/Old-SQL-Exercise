@@ -1,0 +1,1 @@
+select p.* from biciclette as b, produttori as p where b.nome LIKE 'h%' OR b.nome LIKe 'e%' and b.id_produttore=p.ID_produttore
